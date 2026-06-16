@@ -6,156 +6,252 @@
   <title>LUHAIXING | 辽宁陆海星</title>
   <style>
     :root{
-      --bg:#0b1220;
-      --card:#ffffff;
-      --text:#0f172a;
-      --muted:#64748b;
-      --primary:#2563eb;
-      --shadow:0 12px 30px rgba(2,6,23,0.15);
+      --bg:#070D1E;
+      --card:#0C1632;
+      --card2:#0A1228;
+      --text:#E6EDF7;
+      --muted:#93A4C6;
+      --border:rgba(148,163,184,.25);
+      --shadow: 0 10px 30px rgba(2,6,23,.25);
+      --primary:#4F9BFF;
+      --primary2:#22C55E;
+      --warn:#F59E0B;
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);}
-    a{color:inherit}
-    .container{max-width:960px;margin:0 auto;padding:18px}
-    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;flex-direction:column;gap:6px}
-    .brand .en{font-weight:800;letter-spacing:.02em;font-size:16px}
-    .brand .zh{font-size:14px;color:var(--muted)}
-    .actions{display:flex;gap:8px}
-    .btn{border:1px solid rgba(148,163,184,.35);background:rgba(255,255,255,.07);color:white;border-radius:10px;padding:10px 12px;font-size:13px;cursor:pointer;backdrop-filter:blur(6px)}
-    .btn.primary{border-color:rgba(37,99,235,.8);background:rgba(37,99,235,.18)}
-    .btn:focus{outline:2px solid rgba(37,99,235,.6)}
-    .hero{margin-top:16px;border-radius:18px;background:linear-gradient(135deg,#1d2a46,#0b1220 55%);
-          border:1px solid rgba(148,163,184,.25);box-shadow:var(--shadow);color:white;padding:22px}
-    .hero h1{margin:0;font-size:28px;letter-spacing:.01em}
-    .hero p{margin:10px 0 0 0;color:rgba(255,255,255,.75);line-height:1.6}
-    .card{margin-top:14px;border-radius:16px;background:var(--card);box-shadow:var(--shadow);padding:18px}
-    .card h2{margin:0;font-size:18px}
-    .card p{margin:8px 0;color:var(--muted);line-height:1.7}
-    .list{margin:8px 0 0 0;padding-left:18px;color:var(--muted);line-height:1.8}
-    .contact{margin-top:16px;border-radius:16px;border:1px dashed rgba(148,163,184,.6);background:rgba(255,255,255,.05);padding:14px;color:white}
-    .contact a{color:#bfdbfe}
-    .footer{margin-top:14px;color:rgba(255,255,255,.6);font-size:12px;text-align:center}
-    .lang-section{display:none}
-    .lang-section.active{display:block}
+    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background: radial-gradient(1100px 500px at 20% 0%, rgba(79,155,255,.18), transparent 50%), radial-gradient(900px 500px at 85% 10%, rgba(34,197,94,.12), transparent 55%), var(--bg); color:var(--text);}
+    a{color:inherit;}
+    .container{max-width:1100px;margin:0 auto;padding:18px 18px 80px;}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;background:rgba(7,13,30,.75);backdrop-filter:blur(10px);padding:10px 0;z-index:10;}
+    .brand{display:flex;flex-direction:column;gap:4px;}
+    .brand .en{font-size:14px;letter-spacing:.12em;font-weight:900;text-transform:uppercase;color:rgba(230,237,247,.9);}
+    .brand .zh{font-size:13px;color:var(--muted);}
+    .nav{display:flex;gap:8px;flex-wrap:wrap;}
+    .pill{border:1px solid var(--border);background:rgba(255,255,255,.04);border-radius:999px;padding:9px 12px;font-size:13px;color:rgba(230,237,247,.92);text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+    .pill:hover{border-color:rgba(148,163,184,.5);}
+    .pill.primary{border-color:rgba(79,155,255,.5);background:rgba(79,155,255,.14);}
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:16px;}
+    .card{background:linear-gradient(180deg, rgba(12,22,50,.96), rgba(10,18,40,.92));border:1px solid rgba(148,163,184,.18);box-shadow:var(--shadow);border-radius:14px;padding:16px;overflow:hidden;}
+    .card h2{margin:0 0 8px;font-size:18px;letter-spacing:.01em;}
+    .card p{margin:8px 0;color:var(--muted);line-height:1.6;font-size:14px;}
+    .kicker{color:var(--muted);font-size:13px;letter-spacing:.08em;text-transform:uppercase;}
+    .heroTitle{margin:10px 0 12px;font-size:26px;letter-spacing:.01em;line-height:1.2;}
+    .subTitle{margin:0;color:var(--muted);line-height:1.6;font-size:14px;}
+    .badgeRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;}
+    .badge{font-size:12px;border:1px solid rgba(148,163,184,.24);border-radius:999px;padding:6px 10px;color:rgba(230,237,247,.85);background:rgba(255,255,255,.03)}
+    .section{margin-top:16px;}
+    .sectionTitle{margin:0 0 10px;font-size:16px;}
+    .list{margin:0;padding-left:18px;color:var(--muted);line-height:1.7;font-size:14px;}
+    .csGrid{display:grid;grid-template-columns:repeat(2, 1fr);gap:12px;}
+    .csCard{border:1px solid rgba(148,163,184,.18);border-radius:12px;background:rgba(255,255,255,.03);padding:12px;}
+    .csTop{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+    .csName{font-weight:750;font-size:14px;}
+    .tag{font-size:12px;padding:4px 8px;border-radius:999px;border:1px solid rgba(148,163,184,.24);background:rgba(255,255,255,.02);color:rgba(230,237,247,.75);}
+    .csMeta{margin-top:8px;color:var(--muted);font-size:13px;line-height:1.6;}
+    .foot{margin-top:22px;border-top:1px solid rgba(148,163,184,.18);padding-top:12px;color:var(--muted);font-size:13px;display:flex;flex-wrap:wrap;gap:8px;}
+    .langHint{color:var(--warn);font-size:12px;margin-top:10px;line-height:1.6;}
+    .langBlock{display:none;}
+    @media (max-width:880px){
+      .grid{grid-template-columns:1fr;}
+      .csGrid{grid-template-columns:1fr;}
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="topbar">
+  <div class="topbar">
+    <div class="container" style="padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;">
       <div class="brand">
         <div class="en">LUHAIXING</div>
         <div class="zh">辽宁陆海星通信科技有限公司</div>
       </div>
-      <div class="actions" aria-label="Language selector">
-        <button class="btn" id="lang-en" onclick="setLang('en')">English</button>
-        <button class="btn" id="lang-zh" onclick="setLang('zh')">中文</button>
-        <a class="btn primary" href="mailto:info@luhaixing.com.cn">Contact</a>
+      <div class="nav">
+        <a class="pill" href="#services"><span data-en>Services</span><span data-zh>服务</span></a>
+        <a class="pill" href="#process"><span data-en>Process</span><span data-zh>方法论</span></a>
+        <a class="pill" href="#cases"><span data-en>Case Studies</span><span data-zh>案例模板</span></a>
+        <a class="pill" href="#resources"><span data-en>Resources</span><span data-zh>资料中心</span></a>
+        <a class="pill primary" href="#contact">Contact</a>
+        <button class="pill" id="toggleBtn" type="button">中文</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="grid">
+      <div class="card">
+        <div class="kicker" data-en>Capabilities</div>
+        <div class="kicker" data-zh>方向</div>
+        <h1 class="heroTitle" data-en>Industrial software · IoT systems · AI overseas growth</h1>
+        <h1 class="heroTitle" data-zh>工业软件 · 物联网系统 · AI 海外增长</h1>
+        <p class="subTitle" data-en>
+          We turn “export channels” into a repeatable system: language assets, compliance-safe outbound, and measurable pipeline management.
+        </p>
+        <p class="subTitle" data-zh>
+          我们做的是“能落地”的方案：用资产化资料与结构化流程，把海外获客做成可复用系统，避免噱头宣传。
+        </p>
+        <div class="badgeRow">
+          <span class="badge">.com.cn 域名</span>
+          <span class="badge">info@ 邮箱</span>
+          <span class="badge" data-en>Outbound + Landing + Pipeline</span>
+          <span class="badge" data-zh>外联 + 落地页 + 漏斗</span>
+        </div>
+
+        <div class="section" id="services">
+          <h2 class="sectionTitle" data-en>Services</h2>
+          <h2 class="sectionTitle" data-zh>服务</h2>
+          <ul class="list">
+            <li data-en>AI-assisted overseas growth starter kit (ICP → content → outbound → pipeline)</li>
+            <li data-zh>海外增长启动包（画像→内容→外联→跟进）</li>
+            <li data-en>Compliance-safe content templates for B2B outbound</li>
+            <li data-zh>B2B 外联合规内容模板</li>
+            <li data-en>Lead sourcing strategy + tracking</li>
+            <li data-zh>线索挖掘策略与跟踪</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="kicker" data-en>Important note</div>
+        <div class="kicker" data-zh>重要说明</div>
+        <p data-en>
+          The “case studies” below are **Sample/Placeholder** templates to be replaced with real data. We do not use fabricated clients or results.
+        </p>
+        <p data-zh>
+          下方案例为 **Sample/Placeholder** 模板，等你提供真实数据后替换。我们不编造客户与结果。
+        </p>
+        <div class="langHint" data-zh>你只需要提供：真实产品参数、触达渠道、时间线、数字指标（回复率、有效线索、报价/样品/POC 数）。</div>
+        <div class="langHint" data-en>Provide: real product specs, channels, timeline, and metrics (reply rate, qualified leads, quotes/POC count).</div>
+
+        <div class="section" id="process">
+          <h2 class="sectionTitle" data-en>Process</h2>
+          <h2 class="sectionTitle" data-zh>方法论</h2>
+          <ol class="list" style="padding-left:20px;">
+            <li data-en>Research → ICP & buyer roles</li>
+            <li data-zh>调研 → 画像与角色拆分</li>
+            <li data-en>Build assets → domain, email, landing, content</li>
+            <li data-zh>资产化 → 域名邮箱落地页与内容</li>
+            <li data-en>Outbound → cadence + personalization templates</li>
+            <li data-zh>外联 → 节奏与个性化模板</li>
+            <li data-en>Pipeline → CRM checkpoints and decision gates</li>
+            <li data-zh>漏斗 → 节点评审与推进节点</li>
+            <li data-en>Scale → repeat across categories</li>
+            <li data-zh>规模化 → 复制到相近品类</li>
+          </ol>
+        </div>
       </div>
     </div>
 
-    <section class="lang-section" id="page-en">
-      <div class="hero">
-        <h1>Industrial Software · IoT Solutions · AI-powered Overseas Growth</h1>
-        <p>We are building practical solutions that help technology businesses ship better products and explore overseas markets with lean, evidence-based pilots.</p>
-      </div>
-
+    <div class="section" id="cases">
       <div class="card">
-        <h2>About LUHAIXING</h2>
-        <p>LUHAIXING is a China-based technology company. We focus on industrial software development, IoT-style intelligent systems, and AI-driven go-to-market experiments for overseas growth.</p>
+        <h2 class="sectionTitle" data-en>Case Studies (10 Sample Templates)</h2>
+        <h2 class="sectionTitle" data-zh>案例模板（10个 Sample）</h2>
+        <div class="csGrid">
+          <!-- 10 sample cards -->
+          ${Array.from({length:10}).map((_,i)=>{
+            const idx=(i+1).toString().padStart(2,'0');
+            return `<div class="csCard">
+              <div class="csTop">
+                <div class="csName">CASE-ESL-AU-${idx}</div>
+                <div class="tag">Sample</div>
+              </div>
+              <div class="csMeta" data-en>
+                Client type: * | Scenario: *
+                <br/>Scope: landing + outbound + pipeline
+                <br/>Metrics: reply *% | qualified * | POC *
+              </div>
+              <div class="csMeta" data-zh>
+                客户类型：* | 场景：*
+                <br/>范围：落地页 + 外联 + 跟进
+                <br/>指标：回复 *%｜有效 *｜POC/样品 *
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
       </div>
+    </div>
 
+    <div class="section" id="resources">
       <div class="card">
-        <h2>Australia Electronic Shelf Label (ESL) Pilot</h2>
-        <p>This pilot is designed to validate:</p>
+        <h2 class="sectionTitle" data-en>Resources (Placeholder)</h2>
+        <h2 class="sectionTitle" data-zh>资料中心（占位）</h2>
         <ul class="list">
-          <li>market demand and scenarios in Australia (ESL understanding already exists in the market)</li>
-          <li>partner interest from POS providers / system integrators / retail tech distributors</li>
-          <li>what matters most: integration, support, pricing, certifications</li>
-        </ul>
-        <p><strong>Note:</strong> this is a market validation pilot. We do not claim official certifications, government partnerships, or existing Australian retailer deployments.</p>
-      </div>
-
-      <div class="card">
-        <h2>Work With Us</h2>
-        <p>We are open to cooperation and early pilot discussions.</p>
-        <ul class="list">
-          <li>AI-enabled lead generation for overseas markets</li>
-          <li>landing pages + marketing content + compliant outreach</li>
-          <li>feedback-driven iteration and documentation for manufacturers</li>
-        </ul>
-      </div>
-
-      <div class="contact">
-        For inquiries, email <a href="mailto:info@luhaixing.com.cn">info@luhaixing.com.cn</a>
-      </div>
-      <div class="footer">© LUHAIXING. All rights reserved.</div>
-    </section>
-
-    <section class="lang-section" id="page-zh">
-      <div class="hero">
-        <h1>工业软件 · 物联网智能系统 · AI海外增长</h1>
-        <p>我们做“能落地”的方案：用 AI+结构化资料，把公司产品快速做成海外可验证项目，目标是拿到真实反馈，而不是做虚假宣传。</p>
-      </div>
-
-      <div class="card">
-        <h2>关于陆海星</h2>
-        <p>辽宁陆海星通信科技有限公司是一家科技公司，方向是工业软件研发、IoT智能系统、以及AI驱动的海外市场验证与增长服务。</p>
-      </div>
-
-      <div class="card">
-        <h2>澳大利亚电子价签（ESL）验证项目</h2>
-        <p>目标是验证：</p>
-        <ul class="list">
-          <li>澳洲市场对电子价签的需求与应用场景</li>
-          <li>POS服务商/系统集成商/零售科技分销商是否愿意沟通合作</li>
-          <li>对方最关心什么：集成、交付支持、价格区间、认证需求等</li>
-        </ul>
-        <p><strong>说明：</strong>这只是市场验证项目。我们不会对外声称“官方认证”“政府合作”“已经落地某大型澳洲零售商”。</p>
-      </div>
-
-      
-      <div class="card">
-        <h2>合作方式</h2>
-        <p>欢迎沟通：</p>
-        <ul class="list">
-          <li>AI海外获客启动包</li>
+          <li data-en>One-page: ESL market validation</li>
+          <li data-zh>单页：ESL 市场验证项目</li>
+          <li data-en>Outbound cadence (Day 1/3/7/14)</li>
+          <li data-zh>外联节奏（第1/3/7/14日）</li>
+          <li data-en>Compliance checklist</li>
+          <li data-zh>合规检查清单</li>
         </ul>
       </div>
+    </div>
 
-      <div class="contact">
-        合作邮箱：<a href="mailto:info@luhaixing.com.cn">info@luhaixing.com.cn</a>
+    <div class="section" id="contact">
+      <div class="card">
+        <h2 class="sectionTitle">Contact</h2>
+        <p>info@luhaixing.com.cn</p>
+        <p class="langHint" data-en>
+          If you provide even minimal product specs (size/band/software language/certifications), we can make the website & outbound assets much more “enterprise-grade”.
+        </p>
+        <p class="langHint" data-zh>
+          只要你提供最基础的产品信息（尺寸/通信/软件语言/认证），官网与外联资产就能进一步专业化。
+        </p>
       </div>
-      <div class="footer">© LUHAIXING 辽宁陆海星通信科技有限公司</div>
-    </section>
+      <div class="foot">
+        <span>© ${new Date().getFullYear()} Liaoning Luhai Xing Communication Technology Co., Ltd.</span>
+        <span style="color:#FDE68A;">Sample templates only · replace with real cases later</span>
+      </div>
+    </div>
   </div>
 
   <script>
-    function setLang(lang){
-      document.getElementById('page-en').classList.remove('active');
-      document.getElementById('page-zh').classList.remove('active');
-      document.getElementById('lang-en').classList.remove('primary');
-      document.getElementById('lang-zh').classList.remove('primary');
-
-      if(lang === 'zh'){
-        document.getElementById('page-zh').classList.add('active');
-        document.getElementById('lang-zh').classList.add('primary');
-      } else {
-        document.getElementById('page-en').classList.add('active');
-        document.getElementById('lang-en').classList.add('primary');
-      }
-
-      try{ localStorage.setItem('lhx_lang', lang); } catch(e){}
-    }
+    // generate sample cards
+    (function(){
+      const html=document.body.innerHTML;
+      document.body.innerHTML=html.replace(/\$\{Array.from\([\s\S]*?\}\)/,'');
+    })();
 
     (function(){
-      let lang = 'en';
-      try{
-        var stored = localStorage.getItem('lhx_lang');
-        if(stored){ lang = stored; }
-      }catch(e){}
-      setLang(lang);
+      // Since template string was stripped, write case cards once
+      const csGrid=document.querySelector('.csGrid');
+      if(csGrid && !csGrid.dataset.ready){
+        csGrid.dataset.ready='1';
+        csGrid.innerHTML='';
+        const mk=(i)=>{
+          const idx=String(i).padStart(2,'0');
+          const card=document.createElement('div');
+          card.className='csCard';
+          card.innerHTML=`<div class="csTop">
+                <div class="csName">CASE-ESL-AU-${idx}</div>
+                <div class="tag">Sample</div>
+              </div>
+              <div class="csMeta" data-en>
+                Client type: * | Scenario: *
+                <br/>Scope: landing + outbound + pipeline
+                <br/>Metrics: reply *% | qualified * | POC *
+              </div>
+              <div class="csMeta" data-zh>
+                客户类型：* | 场景：*
+                <br/>范围：落地页 + 外联 + 跟进
+                <br/>指标：回复 *%｜有效 *｜POC/样品 *
+              </div>`;
+          csGrid.appendChild(card);
+        };
+        for(let i=1;i<=10;i++) mk(i);
+      }
     })();
+
+    const btn=document.getElementById('toggleBtn');
+    const setLang=(lang)=>{
+      document.querySelectorAll('[data-en]').forEach(n=>n.style.display=lang==='en'?'':'none');
+      document.querySelectorAll('[data-zh]').forEach(n=>n.style.display=lang==='zh'?'':'none');
+      btn.textContent = lang==='zh'?'English':'中文';
+      document.documentElement.lang=lang;
+      localStorage.setItem('lx_lang',lang);
+    };
+    const saved=localStorage.getItem('lx_lang')||'zh';
+    setLang(saved);
+    btn.addEventListener('click',()=>{
+      const lang=document.documentElement.lang==='zh'?'en':'zh';
+      setLang(lang);
+    });
   </script>
 </body>
 </html>
