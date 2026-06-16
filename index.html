@@ -1,936 +1,161 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>辽宁陆海星通信科技有限公司 - 工业软件与工业互联网解决方案提供商</title>
-    <title lang="en">Liaoning Luhaixing Communication Technology Co., Ltd. - Industrial Software and Industrial Internet Solutions Provider</title>
-    <!-- 引入Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- 引入Font Awesome -->
-    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/v4-shims.min.css" rel="stylesheet">
-    <!-- 配置Tailwind自定义颜色和字体 -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#165DFF',
-                        secondary: '#0FC6C2',
-                        dark: '#1D2939',
-                        light: '#F9FAFB'
-                    },
-                    fontFamily: {
-                        inter: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
-    <style type="text/tailwindcss">
-        @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
-            .text-shadow {
-                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            }
-            .transition-custom {
-                transition: all 0.3s ease-in-out;
-            }
-            .scroll-smooth {
-                scroll-behavior: smooth;
-            }
-        }
-    </style>
-    <style>
-        /* 全局样式 */
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-        }
-        /* 导航栏滚动效果 */
-        .navbar-fixed {
-            @apply fixed bg-white/95 shadow-md backdrop-blur-sm;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        /* 滚动动画 */
-        .animate-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .animate-scroll.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* 卡片悬停效果 */
-        .card-hover {
-            transition: all 0.3s ease;
-        }
-        .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LUHAIXING | 辽宁陆海星</title>
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --primary:#2563eb;
+      --shadow:0 12px 30px rgba(2,6,23,0.15);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text);}
+    a{color:inherit}
+    .container{max-width:960px;margin:0 auto;padding:18px}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;flex-direction:column;gap:6px}
+    .brand .en{font-weight:800;letter-spacing:.02em;font-size:16px}
+    .brand .zh{font-size:14px;color:var(--muted)}
+    .actions{display:flex;gap:8px}
+    .btn{border:1px solid rgba(148,163,184,.35);background:rgba(255,255,255,.07);color:white;border-radius:10px;padding:10px 12px;font-size:13px;cursor:pointer;backdrop-filter:blur(6px)}
+    .btn.primary{border-color:rgba(37,99,235,.8);background:rgba(37,99,235,.18)}
+    .btn:focus{outline:2px solid rgba(37,99,235,.6)}
+    .hero{margin-top:16px;border-radius:18px;background:linear-gradient(135deg,#1d2a46,#0b1220 55%);
+          border:1px solid rgba(148,163,184,.25);box-shadow:var(--shadow);color:white;padding:22px}
+    .hero h1{margin:0;font-size:28px;letter-spacing:.01em}
+    .hero p{margin:10px 0 0 0;color:rgba(255,255,255,.75);line-height:1.6}
+    .card{margin-top:14px;border-radius:16px;background:var(--card);box-shadow:var(--shadow);padding:18px}
+    .card h2{margin:0;font-size:18px}
+    .card p{margin:8px 0;color:var(--muted);line-height:1.7}
+    .list{margin:8px 0 0 0;padding-left:18px;color:var(--muted);line-height:1.8}
+    .contact{margin-top:16px;border-radius:16px;border:1px dashed rgba(148,163,184,.6);background:rgba(255,255,255,.05);padding:14px;color:white}
+    .contact a{color:#bfdbfe}
+    .footer{margin-top:14px;color:rgba(255,255,255,.6);font-size:12px;text-align:center}
+    .lang-section{display:none}
+    .lang-section.active{display:block}
+  </style>
 </head>
-<body class="bg-light text-dark">
-    <!-- 导航栏 -->
-    <nav id="navbar" class="w-full py-4 px-6 md:px-12 transition-custom z-50">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-2">
-                <i class="fas fa-microchip text-primary text-2xl"></i>
-                <span class="text-xl font-bold text-primary" data-lang="company-name">陆海星通信科技</span>
-                <span class="text-xl font-bold text-primary hidden" data-lang="company-name-en">Luhaixing Communication Technology</span>
-            </a>
-            <!-- 桌面端导航 -->
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="font-medium hover:text-primary transition-custom" data-lang="nav-home">首页</a>
-                <a href="#home" class="font-medium hover:text-primary transition-custom hidden" data-lang="nav-home-en">Home</a>
-                <a href="#about" class="font-medium hover:text-primary transition-custom" data-lang="nav-about">关于我们</a>
-                <a href="#about" class="font-medium hover:text-primary transition-custom hidden" data-lang="nav-about-en">About Us</a>
-                <a href="#products" class="font-medium hover:text-primary transition-custom" data-lang="nav-products">产品中心</a>
-                <a href="#products" class="font-medium hover:text-primary transition-custom hidden" data-lang="nav-products-en">Products</a>
-                <a href="#achievements" class="font-medium hover:text-primary transition-custom" data-lang="nav-achievements">科技成果</a>
-                <a href="#achievements" class="font-medium hover:text-primary transition-custom hidden" data-lang="nav-achievements-en">Achievements</a>
-                <a href="#contact" class="font-medium hover:text-primary transition-custom" data-lang="nav-contact">联系我们</a>
-                <a href="#contact" class="font-medium hover:text-primary transition-custom hidden" data-lang="nav-contact-en">Contact Us</a>
-                <!-- 语言切换按钮 -->
-                <div class="flex space-x-2">
-                    <button id="langSwitchBtnZh" class="px-3 py-1 rounded-lg bg-primary text-white hover:bg-primary/90 transition-custom" data-lang="lang-zh">中文</button>
-                    <button id="langSwitchBtnEn" class="px-3 py-1 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition-custom" data-lang="lang-en">English</button>
-                </div>
-            </div>
-            <!-- 移动端菜单按钮 -->
-            <div class="md:hidden flex items-center space-x-4">
-                <!-- 移动端语言切换 -->
-                <div class="flex space-x-2">
-                    <button id="langSwitchBtnMobileZh" class="px-3 py-1 rounded-lg bg-primary text-white hover:bg-primary/90 transition-custom" data-lang="lang-zh">中文</button>
-                    <button id="langSwitchBtnMobileEn" class="px-3 py-1 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white transition-custom" data-lang="lang-en">English</button>
-                </div>
-                <button id="menuBtn" class="text-dark text-xl">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-        <!-- 移动端导航菜单 -->
-        <div id="mobileMenu" class="md:hidden hidden bg-white shadow-lg absolute w-full left-0 top-full p-4">
-            <div class="flex flex-col space-y-4">
-                <a href="#home" class="font-medium hover:text-primary transition-custom" data-lang="nav-home">首页</a>
-                <a href="#home" class="font-medium hover:text-primary transition-custom hidden" data-lang="nav-home-en">Home</a>
-                <a href="#about" class="font-medium hover:text-primary transition-custom" data-lang="nav-about">关于我们</a>
-                <a href="#about" class="font-medium hover:text-primary transition-custom hidden" data-lang="nav-about-en">About Us</a>
-                <a href="#products" class="font-medium hover:text-primary transition-custom" data-lang="nav-products">产品中心</a>
-                <a href="#products" class="font-medium hover:text-primary transition-custom hidden" data-lang="nav-products-en">Products</a>
-                <a href="#achievements" class="font-medium hover:text-primary transition-custom" data-lang="nav-achievements">科技成果</a>
-                <a href="#achievements" class="font-medium hover:text-primary transition-custom hidden" data-lang="nav-achievements-en">Achievements</a>
-                <a href="#contact" class="font-medium hover:text-primary transition-custom" data-lang="nav-contact">联系我们</a>
-                <a href="#contact" class="font-medium hover:text-primary transition-custom hidden" data-lang="nav-contact-en">Contact Us</a>
-            </div>
-        </div>
-    </nav>
-    <!-- 首页Banner -->
-    <section id="home" class="relative h-[90vh] flex items-center justify-center overflow-hidden">
-        <img src="https://aka.doubaocdn.com/s/iaj81w89P0" alt="工业互联网与工业软件 banner" class="absolute w-full h-full object-cover">
-        <div class="absolute inset-0 bg-dark/40"></div>
-        <div class="relative z-10 text-center px-4">
-            <h1 class="text-[clamp(2rem,5vw,4rem)] font-bold text-white mb-4 text-shadow animate-scroll" data-lang="banner-title">
-                工业互联网·工业软件
-            </h1>
-            <h1 class="text-[clamp(2rem,5vw,4rem)] font-bold text-white mb-4 text-shadow animate-scroll hidden" data-lang="banner-title-en">
-                Industrial Internet · Industrial Software
-            </h1>
-            <p class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-8 max-w-2xl mx-auto animate-scroll" data-lang="banner-subtitle">
-                赋能制造业数字化转型，提供从自动化、数字化到智能化的多层次软硬件产品及行业解决方案
-            </p>
-            <p class="text-[clamp(1rem,2vw,1.25rem)] text-white/90 mb-8 max-w-2xl mx-auto animate-scroll hidden" data-lang="banner-subtitle-en">
-                Empower digital transformation of manufacturing industry, providing multi-level software and hardware products and industry solutions from automation, digitalization to intelligence
-            </p>
-            <a href="#products" class="inline-block bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-lg transition-custom animate-scroll" data-lang="banner-btn">
-                了解我们的产品
-            </a>
-            <a href="#products" class="inline-block bg-primary hover:bg-primary/90 text-white font-medium py-3 px-8 rounded-lg transition-custom animate-scroll hidden" data-lang="banner-btn-en">
-                Explore Our Products
-            </a>
-        </div>
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <a href="#about" class="text-white/80 hover:text-white">
-                <i class="fas fa-chevron-down text-2xl"></i>
-            </a>
-        </div>
+<body>
+  <div class="container">
+    <div class="topbar">
+      <div class="brand">
+        <div class="en">LUHAIXING</div>
+        <div class="zh">辽宁陆海星通信科技有限公司</div>
+      </div>
+      <div class="actions" aria-label="Language selector">
+        <button class="btn" id="lang-en" onclick="setLang('en')">English</button>
+        <button class="btn" id="lang-zh" onclick="setLang('zh')">中文</button>
+        <a class="btn primary" href="mailto:info@luhaixing.com.cn">Contact</a>
+      </div>
+    </div>
+
+    <section class="lang-section" id="page-en">
+      <div class="hero">
+        <h1>Industrial Software · IoT Solutions · AI-powered Overseas Growth</h1>
+        <p>We are building practical solutions that help technology businesses ship better products and explore overseas markets with lean, evidence-based pilots.</p>
+      </div>
+
+      <div class="card">
+        <h2>About LUHAIXING</h2>
+        <p>LUHAIXING is a China-based technology company. We focus on industrial software development, IoT-style intelligent systems, and AI-driven go-to-market experiments for overseas growth.</p>
+      </div>
+
+      <div class="card">
+        <h2>Australia Electronic Shelf Label (ESL) Pilot</h2>
+        <p>This pilot is designed to validate:</p>
+        <ul class="list">
+          <li>market demand and scenarios in Australia (ESL understanding already exists in the market)</li>
+          <li>partner interest from POS providers / system integrators / retail tech distributors</li>
+          <li>what matters most: integration, support, pricing, certifications</li>
+        </ul>
+        <p><strong>Note:</strong> this is a market validation pilot. We do not claim official certifications, government partnerships, or existing Australian retailer deployments.</p>
+      </div>
+
+      <div class="card">
+        <h2>Work With Us</h2>
+        <p>We are open to cooperation and early pilot discussions.</p>
+        <ul class="list">
+          <li>AI-enabled lead generation for overseas markets</li>
+          <li>landing pages + marketing content + compliant outreach</li>
+          <li>feedback-driven iteration and documentation for manufacturers</li>
+        </ul>
+      </div>
+
+      <div class="contact">
+        For inquiries, email <a href="mailto:info@luhaixing.com.cn">info@luhaixing.com.cn</a>
+      </div>
+      <div class="footer">© LUHAIXING. All rights reserved.</div>
     </section>
-    <!-- 关于我们 -->
-    <section id="about" class="py-20 px-6 md:px-12 bg-white">
-        <div class="container mx-auto">
-            <div class="text-center mb-16 animate-scroll">
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4" data-lang="about-title">关于我们</h2>
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4 hidden" data-lang="about-title-en">About Us</h2>
-                <div class="w-20 h-1 bg-primary mx-auto"></div>
-            </div>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="animate-scroll">
-                    <img src="https://aka.doubaocdn.com/s/od9d1w89Ov" alt="公司办公环境" class="w-full h-auto rounded-lg shadow-lg">
-                </div>
-                <div class="animate-scroll">
-                    <h3 class="text-2xl font-bold text-dark mb-4" data-lang="about-subtitle">辽宁陆海星通信科技有限公司</h3>
-                    <h3 class="text-2xl font-bold text-dark mb-4 hidden" data-lang="about-subtitle-en">Liaoning Luhaixing Communication Technology Co., Ltd.</h3>
-                    <p class="text-gray-600 mb-6" data-lang="about-desc1">
-                        辽宁陆海星通信科技有限公司（简称陆海星），是工业软件产品开发商及解决方案提供商。陆海星聚焦中国工业4.0、智慧市政等领域的智能管控产品开发及行业解决方案，丰富的产品线融入到工业互联网体系的各个环节，提供从自动化、数字化到智能化的多层次的软硬件产品及行业解决方案。
-                    </p>
-                    <p class="text-gray-600 mb-6 hidden" data-lang="about-desc1-en">
-                        Liaoning Luhaixing Communication Technology Co., Ltd. (referred to as Luhaixing) is an industrial software product developer and solution provider. Luhaixing focuses on the development of intelligent control products and industry solutions in China's Industry 4.0, smart municipal and other fields. Its rich product line integrates into all links of the industrial Internet system, providing multi-level software and hardware products and industry solutions from automation, digitalization to intelligence.
-                    </p>
-                    <p class="text-gray-600 mb-6" data-lang="about-desc2">
-                        我们愿用自主技术、产品、服务形成的中国的产业生态，成为细分领域的"隐形冠军"来服务于中国制造，助力中国制造业实现数字化转型与智能化升级。
-                    </p>
-                    <p class="text-gray-600 mb-6 hidden" data-lang="about-desc2-en">
-                        We are willing to use the Chinese industrial ecosystem formed by independent technology, products and services to become a "hidden champion" in the segmented field to serve Chinese manufacturing and help Chinese manufacturing achieve digital transformation and intelligent upgrading.
-                    </p>
-                    <div class="grid grid-cols-2 gap-6 mt-8">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                                <i class="fas fa-microchip text-primary text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-dark" data-lang="about-feature1">自主研发</h4>
-                                <h4 class="font-bold text-dark hidden" data-lang="about-feature1-en">Independent R&D</h4>
-                                <p class="text-gray-600 text-sm" data-lang="about-feature1-desc">拥有多项自主知识产权</p>
-                                <p class="text-gray-600 text-sm hidden" data-lang="about-feature1-desc-en">With multiple independent intellectual property rights</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                                <i class="fas fa-users text-primary text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-dark" data-lang="about-feature2">专业团队</h4>
-                                <h4 class="font-bold text-dark hidden" data-lang="about-feature2-en">Professional Team</h4>
-                                <p class="text-gray-600 text-sm" data-lang="about-feature2-desc">资深技术研发团队</p>
-                                <p class="text-gray-600 text-sm hidden" data-lang="about-feature2-desc-en">Senior technical R&D team</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                                <i class="fas fa-lightbulb text-primary text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-dark" data-lang="about-feature3">创新技术</h4>
-                                <h4 class="font-bold text-dark hidden" data-lang="about-feature3-en">Innovative Technology</h4>
-                                <p class="text-gray-600 text-sm" data-lang="about-feature3-desc">前沿工业互联网技术</p>
-                                <p class="text-gray-600 text-sm hidden" data-lang="about-feature3-desc-en">Cutting-edge industrial internet technology</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-3">
-                            <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                                <i class="fas fa-handshake text-primary text-xl"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-dark" data-lang="about-feature4">优质服务</h4>
-                                <h4 class="font-bold text-dark hidden" data-lang="about-feature4-en">Quality Service</h4>
-                                <p class="text-gray-600 text-sm" data-lang="about-feature4-desc">全流程解决方案服务</p>
-                                <p class="text-gray-600 text-sm hidden" data-lang="about-feature4-desc-en">Full-process solution service</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+    <section class="lang-section" id="page-zh">
+      <div class="hero">
+        <h1>工业软件 · 物联网智能系统 · AI海外增长</h1>
+        <p>我们做“能落地”的方案：用 AI+结构化资料，把公司产品快速做成海外可验证项目，目标是拿到真实反馈，而不是做虚假宣传。</p>
+      </div>
+
+      <div class="card">
+        <h2>关于陆海星</h2>
+        <p>辽宁陆海星通信科技有限公司是一家科技公司，方向是工业软件研发、IoT智能系统、以及AI驱动的海外市场验证与增长服务。</p>
+      </div>
+
+      <div class="card">
+        <h2>澳大利亚电子价签（ESL）验证项目</h2>
+        <p>目标是验证：</p>
+        <ul class="list">
+          <li>澳洲市场对电子价签的需求与应用场景</li>
+          <li>POS服务商/系统集成商/零售科技分销商是否愿意沟通合作</li>
+          <li>对方最关心什么：集成、交付支持、价格区间、认证需求等</li>
+        </ul>
+        <p><strong>说明：</strong>这只是市场验证项目。我们不会对外声称“官方认证”“政府合作”“已经落地某大型澳洲零售商”。</p>
+      </div>
+
+      the next card
+      <div class="card">
+        <h2>合作方式</h2>
+        <p>欢迎沟通：</p>
+        <ul class="list">
+          <li>AI海外获客启动车</li>
+        </ul>
+      </div>
+
+      <div class="contact">
+        合作邮箱：<a href="mailto:info@luhaixing.com.cn">info@luhaixing.com.cn</a>
+      </div>
+      <div class="footer">© LUHAIXING 辽宁陆海星通信科技有限公司</div>
     </section>
-    <!-- 产品中心 -->
-    <section id="products" class="py-20 px-6 md:px-12 bg-gray-50">
-        <div class="container mx-auto">
-            <div class="text-center mb-16 animate-scroll">
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4" data-lang="products-title">产品中心</h2>
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4 hidden" data-lang="products-title-en">Products</h2>
-                <div class="w-20 h-1 bg-primary mx-auto"></div>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto animate-scroll" data-lang="products-subtitle">
-                    我们提供一系列工业软件产品，覆盖生产管控、数据管理、智能监测等多个领域，助力企业实现数字化运营
-                </p>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto animate-scroll hidden" data-lang="products-subtitle-en">
-                    We provide a series of industrial software products covering production control, data management, intelligent monitoring and other fields to help enterprises achieve digital operation
-                </p>
-            </div>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 产品1 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover animate-scroll">
-                    <img src="https://aka.doubaocdn.com/s/WdXM1w89fp" alt="生产管控系统" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-dark mb-2" data-lang="product1-title">生产管控系统</h3>
-                        <h3 class="text-xl font-bold text-dark mb-2 hidden" data-lang="product1-title-en">Production Control System</h3>
-                        <p class="text-gray-600 mb-4" data-lang="product1-desc">
-                            包含生产调度指挥系统、管理者驾驶舱系统等，实现生产过程的智能调度与可视化管理，提高生产效率与质量
-                        </p>
-                        <p class="text-gray-600 mb-4 hidden" data-lang="product1-desc-en">
-                            Including production scheduling command system, manager cockpit system, etc., realizing intelligent scheduling and visual management of production process, improving production efficiency and quality
-                        </p>
-                        <ul class="text-gray-600 space-y-2 mb-4">
-                            <li class="flex items-center" data-lang="product1-feature1">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>实时生产数据采集与分析</span>
-                            </li>
-                            <li class="flex items-center" data-lang="product1-feature2">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>智能生产调度决策</span>
-                            </li>
-                            <li class="flex items-center" data-lang="product1-feature3">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>可视化生产过程监控</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product1-feature1-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Real-time production data collection and analysis</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product1-feature2-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Intelligent production scheduling decision</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product1-feature3-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Visual production process monitoring</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- 产品2 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover animate-scroll">
-                    <img src="https://aka.doubaocdn.com/s/JDep1w89fz" alt="企业综合管理系统" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-dark mb-2" data-lang="product2-title">企业综合管理系统</h3>
-                        <h3 class="text-xl font-bold text-dark mb-2 hidden" data-lang="product2-title-en">Enterprise Integrated Management System</h3>
-                        <p class="text-gray-600 mb-4" data-lang="product2-desc">
-                            采用模块化设计思想，提供资产模型等丰富的管控组件，解决智能制造、调度决策、能源管控等核心需求
-                        </p>
-                        <p class="text-gray-600 mb-4 hidden" data-lang="product2-desc-en">
-                            Adopting modular design concept, providing rich control components such as asset models to solve core needs such as intelligent manufacturing, scheduling decision-making, and energy control
-                        </p>
-                        <ul class="text-gray-600 space-y-2 mb-4">
-                            <li class="flex items-center" data-lang="product2-feature1">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>多业务领域集成管理</span>
-                            </li>
-                            <li class="flex items-center" data-lang="product2-feature2">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>模块化可扩展设计</span>
-                            </li>
-                            <li class="flex items-center" data-lang="product2-feature3">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>全流程业务管控</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product2-feature1-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Multi-business area integrated management</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product2-feature2-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Modular and scalable design</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product2-feature3-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Full-process business control</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- 产品3 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover animate-scroll">
-                    <img src="https://aka.doubaocdn.com/s/GVVW1w89fp" alt="智能监测系统" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-dark mb-2" data-lang="product3-title">智能监测系统</h3>
-                        <h3 class="text-xl font-bold text-dark mb-2 hidden" data-lang="product3-title-en">Intelligent Monitoring System</h3>
-                        <p class="text-gray-600 mb-4" data-lang="product3-desc">
-                            包含三维可视化监测系统、智能巡检系统、能耗监测系统等，实现设备与能耗的实时监测与智能管理
-                        </p>
-                        <p class="text-gray-600 mb-4 hidden" data-lang="product3-desc-en">
-                            Including 3D visual monitoring system, intelligent inspection system, energy consumption monitoring system, etc., realizing real-time monitoring and intelligent management of equipment and energy consumption
-                        </p>
-                        <ul class="text-gray-600 space-y-2 mb-4">
-                            <li class="flex items-center" data-lang="product3-feature1">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>三维可视化园区管控</span>
-                            </li>
-                            <li class="flex items-center" data-lang="product3-feature2">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>智能设备巡检管理</span>
-                            </li>
-                            <li class="flex items-center" data-lang="product3-feature3">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>能耗实时监测与分析</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product3-feature1-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>3D visual park control</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product3-feature2-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Intelligent equipment inspection management</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product3-feature3-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Real-time energy consumption monitoring and analysis</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- 产品4 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover animate-scroll">
-                    <img src="https://aka.doubaocdn.com/s/dq2Y1w89fy" alt="数据管理系统" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-dark mb-2" data-lang="product4-title">数据管理系统</h3>
-                        <h3 class="text-xl font-bold text-dark mb-2 hidden" data-lang="product4-title-en">Data Management System</h3>
-                        <p class="text-gray-600 mb-4" data-lang="product4-desc">
-                            包含企业实时历史数据库管理平台、流程信息可视化平台等，实现工业数据的采集、存储、分析与可视化
-                        </p>
-                        <p class="text-gray-600 mb-4 hidden" data-lang="product4-desc-en">
-                            Including enterprise real-time historical database management platform, process information visualization platform, etc., realizing collection, storage, analysis and visualization of industrial data
-                        </p>
-                        <ul class="text-gray-600 space-y-2 mb-4">
-                            <li class="flex items-center" data-lang="product4-feature1">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>海量工业数据存储</span>
-                            </li>
-                            <li class="flex items-center" data-lang="product4-feature2">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>数据可视化分析展示</span>
-                            </li>
-                            <li class="flex items-center" data-lang="product4-feature3">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>数据安全与管理</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product4-feature1-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Mass industrial data storage</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product4-feature2-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Data visualization analysis and display</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product4-feature3-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Data security and management</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- 产品5 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover animate-scroll">
-                    <img src="https://aka.doubaocdn.com/s/WS9k1w89fx" alt="工业互联网标识解析系统" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-dark mb-2" data-lang="product5-title">工业互联网标识解析系统</h3>
-                        <h3 class="text-xl font-bold text-dark mb-2 hidden" data-lang="product5-title-en">Industrial Internet Identification Resolution System</h3>
-                        <p class="text-gray-600 mb-4" data-lang="product5-desc">
-                            包含标识解析平台企业节点系统、工业互联网标识解析应用平台，实现产品全生命周期数据的采集与管理
-                        </p>
-                        <p class="text-gray-600 mb-4 hidden" data-lang="product5-desc-en">
-                            Including identification resolution platform enterprise node system, industrial Internet identification resolution application platform, realizing collection and management of product full-life cycle data
-                        </p>
-                        <ul class="text-gray-600 space-y-2 mb-4">
-                            <li class="flex items-center" data-lang="product5-feature1">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>标识注册与解析服务</span>
-                            </li>
-                            <li class="flex items-center" data-lang="product5-feature2">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>全生命周期数据追溯</span>
-                            </li>
-                            <li class="flex items-center" data-lang="product5-feature3">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>跨企业数据交互</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product5-feature1-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Identification registration and resolution service</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product5-feature2-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Full-life cycle data traceability</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product5-feature3-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Cross-enterprise data interaction</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- 产品6 -->
-                <div class="bg-white rounded-lg shadow-md overflow-hidden card-hover animate-scroll">
-                    <img src="https://aka.doubaocdn.com/s/4R5N1w89fw" alt="工业智能报警管理平台" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold text-dark mb-2" data-lang="product6-title">工业智能报警管理平台</h3>
-                        <h3 class="text-xl font-bold text-dark mb-2 hidden" data-lang="product6-title-en">Industrial Intelligent Alarm Management Platform</h3>
-                        <p class="text-gray-600 mb-4" data-lang="product6-desc">
-                            能够识别、减少无效报警，为操作人员提供快速的操作指导，明显缩短报警管理周期，提高报警管理的实时性和可靠性
-                        </p>
-                        <p class="text-gray-600 mb-4 hidden" data-lang="product6-desc-en">
-                            It can identify and reduce invalid alarms, provide quick operation guidance for operators, significantly shorten the alarm management cycle, and improve the real-time performance and reliability of alarm management
-                        </p>
-                        <ul class="text-gray-600 space-y-2 mb-4">
-                            <li class="flex items-center" data-lang="product6-feature1">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>无效报警识别与过滤</span>
-                            </li>
-                            <li class="flex items-center" data-lang="product6-feature2">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>快速操作指导</span>
-                            </li>
-                            <li class="flex items-center" data-lang="product6-feature3">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>报警统计与分析</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product6-feature1-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Invalid alarm identification and filtering</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product6-feature2-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Quick operation guidance</span>
-                            </li>
-                            <li class="flex items-center hidden" data-lang="product6-feature3-en">
-                                <i class="fas fa-check text-primary mr-2"></i>
-                                <span>Alarm statistics and analysis</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- 科技成果 -->
-    <section id="achievements" class="py-20 px-6 md:px-12 bg-white">
-        <div class="container mx-auto">
-            <div class="text-center mb-16 animate-scroll">
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4" data-lang="achievements-title">科技成果</h2>
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4 hidden" data-lang="achievements-title-en">Achievements</h2>
-                <div class="w-20 h-1 bg-primary mx-auto"></div>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto animate-scroll" data-lang="achievements-subtitle">
-                    我们注重技术创新与成果转化，拥有多项自主知识产权，实现科技成果的高效转化与应用
-                </p>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto animate-scroll hidden" data-lang="achievements-subtitle-en">
-                    We focus on technological innovation and achievement transformation, with multiple independent intellectual property rights, realizing efficient transformation and application of scientific and technological achievements
-                </p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="animate-scroll">
-                    <img src="https://aka.doubaocdn.com/s/ieT11w89Ov" alt="研发团队" class="w-full h-auto rounded-lg shadow-lg">
-                </div>
-                <div class="animate-scroll">
-                    <h3 class="text-2xl font-bold text-dark mb-4" data-lang="achievements-subtitle2">科技成果转化</h3>
-                    <h3 class="text-2xl font-bold text-dark mb-4 hidden" data-lang="achievements-subtitle2-en">Scientific and Technological Achievement Transformation</h3>
-                    <p class="text-gray-600 mb-6" data-lang="achievements-desc1">
-                        2021年至2023年间，我公司共实现科技成果转化13项，所有科技成果均100%转化，形成了一系列具有自主知识产权的工业软件产品，应用于工业制造、智慧市政等多个领域。
-                    </p>
-                    <p class="text-gray-600 mb-6 hidden" data-lang="achievements-desc1-en">
-                        From 2021 to 2023, our company has achieved 13 scientific and technological achievement transformations, all of which are 100% transformed, forming a series of industrial software products with independent intellectual property rights, applied in industrial manufacturing, smart municipal and other fields.
-                    </p>
-                    <div class="mb-8">
-                        <h4 class="font-bold text-dark mb-3" data-lang="achievements-ip-title">自主知识产权</h4>
-                        <h4 class="font-bold text-dark mb-3 hidden" data-lang="achievements-ip-title-en">Independent Intellectual Property Rights</h4>
-                        <ul class="text-gray-600 space-y-3">
-                            <li class="flex items-start" data-lang="ip1">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>管理者驾驶舱系统V1.0（软著登字第1087309号）</span>
-                            </li>
-                            <li class="flex items-start" data-lang="ip2">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>流程信息可视化平台V1.0（软著登字第1085291号）</span>
-                            </li>
-                            <li class="flex items-start" data-lang="ip3">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>生产调度指挥系统V1.0（软著登字第1087832号）</span>
-                            </li>
-                            <li class="flex items-start" data-lang="ip4">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>企业综合管理系统V1.0（软著登字第1085288号）</span>
-                            </li>
-                            <li class="flex items-start" data-lang="ip5">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>工业智能报警管理平台V1.0（软著登字第1088433号）</span>
-                            </li>
-                            <li class="flex items-start" data-lang="ip6">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>标识解析平台企业节点系统V1.0（软著登字第1088489号）</span>
-                            </li>
-                            <li class="flex items-start" data-lang="ip7">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>生产全过程监控系统V1.0（软著登字第1087158号）</span>
-                            </li>
-                            <li class="flex items-start hidden" data-lang="ip1-en">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>Manager Cockpit System V1.0 (Copyright Registration No. 1087309)</span>
-                            </li>
-                            <li class="flex items-start hidden" data-lang="ip2-en">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>Process Information Visualization Platform V1.0 (Copyright Registration No. 1085291)</span>
-                            </li>
-                            <li class="flex items-start hidden" data-lang="ip3-en">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>Production Scheduling Command System V1.0 (Copyright Registration No. 1087832)</span>
-                            </li>
-                            <li class="flex items-start hidden" data-lang="ip4-en">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>Enterprise Integrated Management System V1.0 (Copyright Registration No. 1085288)</span>
-                            </li>
-                            <li class="flex items-start hidden" data-lang="ip5-en">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>Industrial Intelligent Alarm Management Platform V1.0 (Copyright Registration No. 1088433)</span>
-                            </li>
-                            <li class="flex items-start hidden" data-lang="ip6-en">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>Identification Resolution Platform Enterprise Node System V1.0 (Copyright Registration No. 1088489)</span>
-                            </li>
-                            <li class="flex items-start hidden" data-lang="ip7-en">
-                                <i class="fas fa-copyright text-primary mt-1 mr-3"></i>
-                                <span>Production Whole Process Monitoring System V1.0 (Copyright Registration No. 1087158)</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-primary/5 p-5 rounded-lg">
-                        <h4 class="font-bold text-dark mb-2" data-lang="achievements-rd-title">研发实力</h4>
-                        <h4 class="font-bold text-dark mb-2 hidden" data-lang="achievements-rd-title-en">R&D Strength</h4>
-                        <p class="text-gray-600" data-lang="achievements-rd-desc">
-                            我们拥有专业的研发团队，建立了完善的研发管理制度，持续投入研发资源，不断提升技术创新能力，为客户提供更优质的产品与服务。
-                        </p>
-                        <p class="text-gray-600 hidden" data-lang="achievements-rd-desc-en">
-                            We have a professional R&D team, established a sound R&D management system, continuously invested in R&D resources, and continuously improved technological innovation capabilities to provide customers with better products and services.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- 联系我们 -->
-    <section id="contact" class="py-20 px-6 md:px-12 bg-gray-50">
-        <div class="container mx-auto">
-            <div class="text-center mb-16 animate-scroll">
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4" data-lang="contact-title">联系我们</h2>
-                <h2 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-4 hidden" data-lang="contact-title-en">Contact Us</h2>
-                <div class="w-20 h-1 bg-primary mx-auto"></div>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto animate-scroll" data-lang="contact-subtitle">
-                    如有合作需求或产品咨询，欢迎联系我们，我们将为您提供专业的解决方案与服务
-                </p>
-                <p class="text-gray-600 mt-4 max-w-2xl mx-auto animate-scroll hidden" data-lang="contact-subtitle-en">
-                    If you have cooperation needs or product inquiries, please feel free to contact us, we will provide you with professional solutions and services
-                </p>
-            </div>
-            <div class="grid md:grid-cols-2 gap-12">
-                <div class="animate-scroll">
-                    <div class="bg-white p-8 rounded-lg shadow-md h-full">
-                        <h3 class="text-xl font-bold text-dark mb-6" data-lang="contact-info-title">联系方式</h3>
-                        <h3 class="text-xl font-bold text-dark mb-6 hidden" data-lang="contact-info-title-en">Contact Information</h3>
-                        <div class="space-y-6">
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-map-marker-alt text-primary text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="font-bold text-dark mb-1" data-lang="contact-address-title">公司地址</h4>
-                                    <h4 class="font-bold text-dark mb-1 hidden" data-lang="contact-address-title-en">Company Address</h4>
-                                    <p class="text-gray-600" data-lang="contact-address">辽宁省沈阳市皇姑区昆山中路7-1号</p>
-                                    <p class="text-gray-600 hidden" data-lang="contact-address-en">No.7-1, Kunshan Middle Road, Huanggu District, Shenyang City, Liaoning Province</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-phone text-primary text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="font-bold text-dark mb-1" data-lang="contact-phone-title">咨询电话</h4>
-                                    <h4 class="font-bold text-dark mb-1 hidden" data-lang="contact-phone-title-en">Consultation Phone</h4>
-                                    <p class="text-gray-600" data-lang="contact-phone">13664178877</p>
-                                    <p class="text-gray-600 hidden" data-lang="contact-phone-en">13664178877</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-envelope text-primary text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="font-bold text-dark mb-1" data-lang="contact-email-title">电子邮箱</h4>
-                                    <h4 class="font-bold text-dark mb-1 hidden" data-lang="contact-email-title-en">Email Address</h4>
-                                    <p class="text-gray-600" data-lang="contact-email">luhaixing@163.com</p>
-                                    <p class="text-gray-600 hidden" data-lang="contact-email-en">luhaixing@163.com</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-clock text-primary text-xl"></i>
-                                </div>
-                                <div class="ml-4">
-                                    <h4 class="font-bold text-dark mb-1" data-lang="contact-time-title">工作时间</h4>
-                                    <h4 class="font-bold text-dark mb-1 hidden" data-lang="contact-time-title-en">Working Hours</h4>
-                                    <p class="text-gray-600" data-lang="contact-time">周一至周五 9:00-18:00</p>
-                                    <p class="text-gray-600 hidden" data-lang="contact-time-en">Monday to Friday 9:00-18:00</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-8">
-                            <h4 class="font-bold text-dark mb-3" data-lang="contact-follow-title">关注我们</h4>
-                            <h4 class="font-bold text-dark mb-3 hidden" data-lang="contact-follow-title-en">Follow Us</h4>
-                            <div class="flex space-x-4">
-                                <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white transition-custom">
-                                    <i class="fab fa-weixin"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white transition-custom">
-                                    <i class="fab fa-weibo"></i>
-                                </a>
-                                <a href="#" class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-white transition-custom">
-                                    <i class="fab fa-linkedin"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="animate-scroll">
-                    <div class="bg-white p-8 rounded-lg shadow-md h-full">
-                        <h3 class="text-xl font-bold text-dark mb-6" data-lang="contact-form-title">留言咨询</h3>
-                        <h3 class="text-xl font-bold text-dark mb-6 hidden" data-lang="contact-form-title-en">Leave a Message</h3>
-                        <form>
-                            <div class="mb-4">
-                                <label for="name" class="block text-gray-700 font-medium mb-2" data-lang="form-name">您的姓名</label>
-                                <label for="name" class="block text-gray-700 font-medium mb-2 hidden" data-lang="form-name-en">Your Name</label>
-                                <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-custom" placeholder="请输入您的姓名" placeholder-lang="en" placeholder="Please enter your name">
-                            </div>
-                            <div class="mb-4">
-                                <label for="phone" class="block text-gray-700 font-medium mb-2" data-lang="form-phone">联系电话</label>
-                                <label for="phone" class="block text-gray-700 font-medium mb-2 hidden" data-lang="form-phone-en">Your Phone</label>
-                                <input type="tel" id="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-custom" placeholder="请输入您的联系电话" placeholder-lang="en" placeholder="Please enter your phone number">
-                            </div>
-                            <div class="mb-4">
-                                <label for="email" class="block text-gray-700 font-medium mb-2" data-lang="form-email">电子邮箱</label>
-                                <label for="email" class="block text-gray-700 font-medium mb-2 hidden" data-lang="form-email-en">Your Email</label>
-                                <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-custom" placeholder="请输入您的电子邮箱" placeholder-lang="en" placeholder="Please enter your email">
-                            </div>
-                            <div class="mb-6">
-                                <label for="message" class="block text-gray-700 font-medium mb-2" data-lang="form-message">咨询内容</label>
-                                <label for="message" class="block text-gray-700 font-medium mb-2 hidden" data-lang="form-message-en">Your Message</label>
-                                <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-custom" placeholder="请输入您的咨询内容" placeholder-lang="en" placeholder="Please enter your message"></textarea>
-                            </div>
-                            <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-lg transition-custom" data-lang="form-submit">
-                                提交咨询
-                            </button>
-                            <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-6 rounded-lg transition-custom hidden" data-lang="form-submit-en">
-                                Submit Inquiry
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- 页脚 -->
-    <footer class="bg-dark text-white py-12 px-6 md:px-12">
-        <div class="container mx-auto">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center space-x-2 mb-4">
-                        <i class="fas fa-microchip text-primary text-2xl"></i>
-                        <span class="text-xl font-bold text-white" data-lang="footer-company">陆海星通信科技</span>
-                        <span class="text-xl font-bold text-white hidden" data-lang="footer-company-en">Luhaixing Communication Technology</span>
-                    </div>
-                    <p class="text-gray-400 mb-4" data-lang="footer-desc">
-                        工业软件产品开发商及解决方案提供商，助力中国制造数字化转型
-                    </p>
-                    <p class="text-gray-400 mb-4 hidden" data-lang="footer-desc-en">
-                        Industrial software product developer and solution provider, empowering digital transformation of Chinese manufacturing
-                    </p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-custom">
-                            <i class="fab fa-weixin"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-custom">
-                            <i class="fab fa-weibo"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-custom">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-4" data-lang="footer-quick-link">快速链接</h4>
-                    <h4 class="text-white font-bold mb-4 hidden" data-lang="footer-quick-link-en">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#home" class="text-gray-400 hover:text-white transition-custom" data-lang="footer-home">首页</a></li>
-                        <li><a href="#home" class="text-gray-400 hover:text-white transition-custom hidden" data-lang="footer-home-en">Home</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white transition-custom" data-lang="footer-about">关于我们</a></li>
-                        <li><a href="#about" class="text-gray-400 hover:text-white transition-custom hidden" data-lang="footer-about-en">About Us</a></li>
-                        <li><a href="#products" class="text-gray-400 hover:text-white transition-custom" data-lang="footer-products">产品中心</a></li>
-                        <li><a href="#products" class="text-gray-400 hover:text-white transition-custom hidden" data-lang="footer-products-en">Products</a></li>
-                        <li><a href="#achievements" class="text-gray-400 hover:text-white transition-custom" data-lang="footer-achievements">科技成果</a></li>
-                        <li><a href="#achievements" class="text-gray-400 hover:text-white transition-custom hidden" data-lang="footer-achievements-en">Achievements</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-custom" data-lang="footer-contact">联系我们</a></li>
-                        <li><a href="#contact" class="text-gray-400 hover:text-white transition-custom hidden" data-lang="footer-contact-en">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-4" data-lang="footer-product-service">产品服务</h4>
-                    <h4 class="text-white font-bold mb-4 hidden" data-lang="footer-product-service-en">Product Services</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom" data-lang="footer-product1">生产管控系统</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom hidden" data-lang="footer-product1-en">Production Control System</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom" data-lang="footer-product2">企业管理系统</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom hidden" data-lang="footer-product2-en">Enterprise Management System</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom" data-lang="footer-product3">智能监测系统</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom hidden" data-lang="footer-product3-en">Intelligent Monitoring System</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom" data-lang="footer-product4">数据管理系统</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom hidden" data-lang="footer-product4-en">Data Management System</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom" data-lang="footer-product5">标识解析系统</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-custom hidden" data-lang="footer-product5-en">Identification Resolution System</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="text-white font-bold mb-4" data-lang="footer-contact">联系我们</h4>
-                    <h4 class="text-white font-bold mb-4 hidden" data-lang="footer-contact-en">Contact Us</h4>
-                    <ul class="space-y-2">
-                        <li class="flex items-center text-gray-400" data-lang="footer-address">
-                            <i class="fas fa-map-marker-alt mr-2"></i>
-                            <span>辽宁省沈阳市皇姑区昆山中路7-1号</span>
-                        </li>
-                        <li class="flex items-center text-gray-400 hidden" data-lang="footer-address-en">
-                            <i class="fas fa-map-marker-alt mr-2"></i>
-                            <span>No.7-1, Kunshan Middle Road, Huanggu District, Shenyang City, Liaoning Province</span>
-                        </li>
-                        <li class="flex items-center text-gray-400" data-lang="footer-phone">
-                            <i class="fas fa-phone mr-2"></i>
-                            <span>13664178877</span>
-                        </li>
-                        <li class="flex items-center text-gray-400 hidden" data-lang="footer-phone-en">
-                            <i class="fas fa-phone mr-2"></i>
-                            <span>13664178877</span>
-                        </li>
-                        <li class="flex items-center text-gray-400" data-lang="footer-email">
-                            <i class="fas fa-envelope mr-2"></i>
-                            <span>luhaixing@163.com</span>
-                        </li>
-                        <li class="flex items-center text-gray-400 hidden" data-lang="footer-email-en">
-                            <i class="fas fa-envelope mr-2"></i>
-                            <span>luhaixing@163.com</span>
-                        </li>
-                        <li class="flex items-center text-gray-400" data-lang="footer-time">
-                            <i class="fas fa-clock mr-2"></i>
-                            <span>周一至周五 9:00-18:00</span>
-                        </li>
-                        <li class="flex items-center text-gray-400 hidden" data-lang="footer-time-en">
-                            <i class="fas fa-clock mr-2"></i>
-                            <span>Monday to Friday 9:00-18:00</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500">
-                <p data-lang="footer-copyright">© 2025 辽宁陆海星通信科技有限公司 版权所有</p>
-                <p hidden data-lang="footer-copyright-en">© 2025 Liaoning Luhaixing Communication Technology Co., Ltd. All rights reserved</p>
-            </div>
-        </div>
-    </footer>
-    <!-- JavaScript -->
-    <script>
-        // 导航栏滚动效果
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('navbar-fixed');
-            } else {
-                navbar.classList.remove('navbar-fixed');
-            }
-        });
-        // 移动端菜单切换
-        const menuBtn = document.getElementById('menuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        menuBtn.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
-        });
-        // 滚动动画
-        const animateElements = document.querySelectorAll('.animate-scroll');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-        animateElements.forEach(element => {
-            observer.observe(element);
-        });
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    // 关闭移动端菜单
-                    mobileMenu.classList.add('hidden');
-                }
-            });
-        });
-        // 表单提交
-        const form = document.querySelector('form');
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const currentLang = document.documentElement.lang;
-            if (currentLang === 'zh-CN') {
-                alert('您的咨询已提交，我们将尽快与您联系！');
-            } else {
-                alert('Your inquiry has been submitted, we will contact you as soon as possible!');
-            }
-            form.reset();
-        });
-        // 语言切换功能
-        const langSwitchBtnZh = document.getElementById('langSwitchBtnZh');
-        const langSwitchBtnEn = document.getElementById('langSwitchBtnEn');
-        const langSwitchBtnMobileZh = document.getElementById('langSwitchBtnMobileZh');
-        const langSwitchBtnMobileEn = document.getElementById('langSwitchBtnMobileEn');
-        // 切换到中文
-        function switchToChinese() {
-            document.documentElement.lang = 'zh-CN';
-            // 隐藏英文内容元素，显示中文内容元素（不隐藏语言切换按钮）
-            document.querySelectorAll('[data-lang$="-en"]:not([data-lang="lang-en"])').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('[data-lang]:not([data-lang$="-en"]):not([data-lang="lang-en"])').forEach(el => el.classList.remove('hidden'));
-            // 修改按钮样式
-            langSwitchBtnZh.classList.add('bg-primary', 'text-white');
-            langSwitchBtnZh.classList.remove('border', 'border-primary', 'text-primary');
-            langSwitchBtnEn.classList.add('border', 'border-primary', 'text-primary');
-            langSwitchBtnEn.classList.remove('bg-primary', 'text-white');
-            // 移动端按钮
-            langSwitchBtnMobileZh.classList.add('bg-primary', 'text-white');
-            langSwitchBtnMobileZh.classList.remove('border', 'border-primary', 'text-primary');
-            langSwitchBtnMobileEn.classList.add('border', 'border-primary', 'text-primary');
-            langSwitchBtnMobileEn.classList.remove('bg-primary', 'text-white');
-            // 修改页面标题
-            document.title = document.querySelector('title[lang="zh-CN"]').textContent;
-        }
-        // 切换到英文
-        function switchToEnglish() {
-            document.documentElement.lang = 'en';
-            // 隐藏中文内容元素，显示英文内容元素（不隐藏语言切换按钮）
-            document.querySelectorAll('[data-lang]:not([data-lang$="-en"]):not([data-lang="lang-zh"]):not([data-lang="lang-en"])').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('[data-lang$="-en"]').forEach(el => el.classList.remove('hidden'));
-            // 修改按钮样式
-            langSwitchBtnEn.classList.add('bg-primary', 'text-white');
-            langSwitchBtnEn.classList.remove('border', 'border-primary', 'text-primary');
-            langSwitchBtnZh.classList.add('border', 'border-primary', 'text-primary');
-            langSwitchBtnZh.classList.remove('bg-primary', 'text-white');
-            // 移动端按钮
-            langSwitchBtnMobileEn.classList.add('bg-primary', 'text-white');
-            langSwitchBtnMobileEn.classList.remove('border', 'border-primary', 'text-primary');
-            langSwitchBtnMobileZh.classList.add('border', 'border-primary', 'text-primary');
-            langSwitchBtnMobileZh.classList.remove('bg-primary', 'text-white');
-            // 修改页面标题
-            document.title = document.querySelector('title[lang="en"]').textContent;
-        }
-        // 绑定事件
-        langSwitchBtnZh.addEventListener('click', switchToChinese);
-        langSwitchBtnEn.addEventListener('click', switchToEnglish);
-        langSwitchBtnMobileZh.addEventListener('click', switchToChinese);
-        langSwitchBtnMobileEn.addEventListener('click', switchToEnglish);
-    </script>
+  </div>
+
+  <script>
+    function setLang(lang){
+      document.getElementById('page-en').classList.remove('active');
+      document.getElementById('page-zh').classList.remove('active');
+      document.getElementById('lang-en').classList.remove('primary');
+      document.getElementById('lang-zh').classList.remove('primary');
+
+      if(lang === 'zh'){
+        document.getElementById('page-zh').classList.add('active');
+        document.getElementById('lang-zh').classList.add('primary');
+      } else {
+        document.getElementById('page-en').classList.add('active');
+        document.getElementById('lang-en').classList.add('primary');
+      }
+
+      try{ localStorage.setItem('lhx_lang', lang); } catch(e){}
+    }
+
+    (function(){
+      let lang = 'en';
+      try{
+        var stored = localStorage.getItem('lhx_lang');
+        if(stored){ lang = stored; }
+      }catch(e){}
+      setLang(lang);
+    })();
+  </script>
 </body>
 </html>
